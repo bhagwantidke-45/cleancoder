@@ -1,12 +1,41 @@
-const aiService = require('../services/ai.service'); // Importing aiService to handle AI-related logic
+
+const aiService = require("../services/ai.service");
+
 module.exports.getResponse = async (req, res) => {
-  const prompt = req.query.prompt; // Extracting the prompt from the query parameters
+  try {
+    const code = req.body.code;
+    if (!code) {
+      return res.status(400).json({ error: "Code is required" });
+    }
 
-  if (!prompt) {
-    return res.status(400).send({ error: "Prompt is required" }); // Return error if prompt is not provided
+    const prompt = `
+You are a senior JavaScript code reviewer.
+Review the following code and:
+1. Point out issues or improvements.
+2. Suggest better practices.
+3. Format your answer in Markdown.
+4. Include syntax-highlighted code examples inside triple backticks.
+
+Code to review:
+\`\`\`javascript
+${code}
+\`\`\`
+`;
+
+    const reviewText = await aiService.getAIResponse(prompt);
+    res.status(200).json({ response: reviewText });
+
+  } catch (error) {
+    console.error("AI Controller Error:", error.message);
+
+    if (error.message.includes("overloaded")) {
+      return res.status(503).json({ error: "The AI service is overloaded. Please try again in a moment." });
+    }
+
+    if (error.message.includes("unavailable")) {
+      return res.status(503).json({ error: "The AI service is currently unavailable. Please try again later." });
+    }
+
+    res.status(500).json({ error: "Internal Server Error" });
   }
-
-
-    const response = await aiService(prompt); // Call the aiService with the prompt
-res.send(response); // Send the response back to the client
 };
