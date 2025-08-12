@@ -10,12 +10,12 @@ import axios from 'axios'
 import './App.css'
 
 function App() {
-  const [ count, setCount ] = useState(0)
-  const [ code, setCode ] = useState(` function sum() {
+  const [count, setCount] = useState(0)
+  const [code, setCode] = useState(` function sum() {
   return 1 + 1
 }`)
 
-  const [ review, setReview ] = useState(``)
+  const [review, setReview] = useState(``)
 
   useEffect(() => {
     prism.highlightAll()
@@ -31,7 +31,23 @@ function App() {
       <main>
         <div className="left">
           <div className="code">
+
+
+
+            <div style={{
+              padding: "8px 12px",
+              fontWeight: "bold",
+              backgroundColor: "#343434",
+              color: "#fff",
+              borderBottom: "1px solid #444",
+              borderTopLeftRadius: "10px",
+              borderTopRightRadius: "10px"
+            }}>
+              💻 Code Editor
+            </div>
+
             <Editor
+
               value={code}
               onValueChange={code => setCode(code)}
               highlight={code => prism.highlight(code, prism.languages.javascript, "javascript")}
@@ -39,21 +55,37 @@ function App() {
               style={{
                 fontFamily: '"Fira code", "Fira Mono", monospace',
                 fontSize: 16,
-                border: "1px solid #ddd",
-                borderRadius: "5px",
-                height: "100%",
-                width: "100%"
+
+                height: "95%",
+                width: "100%",
+
+                minHeight: "300px",
+                overflow: "auto",          // vertical scrollbar if needed
+                whiteSpace: "pre-wrap",    // wrap lines
+                wordBreak: "break-word"    // break long words
               }}
             />
+
           </div>
           <div
             onClick={reviewCode}
             className="review">Review</div>
         </div>
         <div className="right">
+          <div style={{
+            padding: "8px 12px",
+            fontWeight: "bold",
+            backgroundColor: "#222",
+            color: "#fff",
+            borderBottom: "1px solid #444",
+            borderTopLeftRadius: "10px",
+            borderTopRightRadius: "10px"
+          }}>
+            Code Review Output
+          </div>
           <Markdown
 
-            rehypePlugins={[ rehypeHighlight ]}
+            rehypePlugins={[rehypeHighlight]}
 
           >{review}</Markdown>
         </div>

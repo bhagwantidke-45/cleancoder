@@ -2,7 +2,7 @@
 * {
   margin: 0%;
   padding: 0%;
-  box-sizing: border-box;
+  box-sizing:border-box;
 }
 
 html,
@@ -30,35 +30,66 @@ main .right {
 main .left {
   background-color: #000000;
   position: relative;
+  overflow-y:scroll;
+  overflow-wrap: anywhere;
 }
 
 .left .code,
 .code pre,
 .code pre code {
-  height: 100%;
+  height:max-content;
   width: 100%;
   margin: 0;
   border-radius: 0.7rem;
   background-color: #0c0c0c;
 }
 
+
 main .left .review {
-  position: absolute;
+  position:static;
+  width: max-content;
+  height: max-content;
+  margin-left: 84%;
+  margin-top: 0.7rem;
   bottom: 1rem;
   right: 1rem;
-  background-color: rgb(219, 219, 255);
-  color: #000000;
+  background-color: #343434;
+  color: #03b433;
   padding: 0.5rem 2rem;
   font-weight: 500;
   cursor: pointer;
   user-select: none;
   border-radius: 0.7rem;
+  transition: background-color 0.3s ease;
+  &:hover {
+    background-color:#454343;
+    color:#03b433;
+    font-weight: 800;
+  }
+
+
 }
 
 
 main .right {
   background-color: #343434;
   padding: 1rem 2rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
   overflow: auto;
+  overflow-wrap: break-word;
+  border-radius: 0.7rem;
+}
+
+
+/* Code Editor Styles */  /*added outline to the code editor*/
+.code textarea:focus {
+    outline: none;
+}
+
+
+.code textarea:focus {
+    outline: none;
+    box-shadow: 0 0 20px #03b433;
+    border: 5px solid #03b433;
+    border-radius: 1rem;
 }
