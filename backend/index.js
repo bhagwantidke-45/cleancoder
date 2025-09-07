@@ -3,7 +3,7 @@ require("dotenv").config();
 const aiRoutes = require("./src/routes/ai.routes"); // ✅ Correct path
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use('/ai', aiRoutes); // ✅ Use the router
 
