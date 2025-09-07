@@ -22,7 +22,7 @@ function App() {
   }, [])
 
   async function reviewCode() {
-    const response = await axios.post('http://localhost:3002/ai/get-response', { code })
+    const response = await axios.post('https://cleancoder-backend-kvbx.onrender.com/ai/get-response', { code })
     setReview(response.data.response)
   }
 
