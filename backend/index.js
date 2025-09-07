@@ -11,6 +11,14 @@ app.use(express.json());
 
 app.use('/ai', aiRoutes); // ✅ Use the router
 
+
+
+app.get("/", (req, res) => {
+  res.send("✅ Backend is working! Go to /ai for routes.");
+});
+
+
+
 app.listen(PORT, () => {
   console.log("server started");
 });
